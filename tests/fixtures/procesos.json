@@ -1,0 +1,136 @@
+{
+ "version": 1,
+ "licencia": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.es). Los textos y enlaces de cada oferta y comunicado pertenecen a su organismo.",
+ "documentacion": "https://alertapublica.es/datos/",
+ "generado": "2026-11-09T22:12:28+00:00",
+ "procesos": [
+  {
+   "id": "76fd882cb7",
+   "organismo": "tragsa",
+   "nombre": "Tasa de reposición específica 2026 Grupo Tragsa",
+   "tipo": "tasa",
+   "acceso": "libre",
+   "tipo_contrato": "indefinido",
+   "sistema": "concurso-oposicion",
+   "estado": "abierto",
+   "plazo_fin": "2026-11-10",
+   "plazo_hora": "23:59",
+   "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasas-reposicion-especifica-2025-2026/Paginas/tre-2026-grupo-tragsa.aspx",
+   "url_inscripcion": "https://grupotragsatre2026.iformalia.es/",
+   "comunicados": [
+    {
+     "fecha": "2026-10-26",
+     "titulo": "SE PUBLICAN CORRECCIONES DE ERRORES DE ANEXOS ESPECÍFICOS DE PUESTOS DE TRABAJO CONVOCADOS EN EL PROCESO SELECTIVO DE LA TASA DE REPOSICIÓN ESPECÍFICA 2026 DEL GRUPO TRAGSA (TRAGSA Y TRAGSATEC) PUBLICADOS EL DÍA 8 DE OCTUBRE DE 2026.",
+     "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasas-reposicion-especifica-2025-2026/Paginas/tre-2026-grupo-tragsa.aspx"
+    },
+    {
+     "fecha": "2026-10-23",
+     "titulo": "EL LUNES 26 OCTUBRE SE PUBLICARÁN CORRECCIONES DE ERRORES DE ANEXOS ESPECÍFICOS DE PUESTOS DE TRABAJO CONVOCADOS EN EL PROCESO SELECTIVO DE LA TASA DE REPOSICIÓN ESPECÍFICA 2026 DEL GRUPO TRAGSA (TRAGSA Y TRAGASTEC) PUBLICADOS EL DÍA 8 DE OCTUBRE DE 2026",
+     "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasas-reposicion-especifica-2025-2026/Paginas/tre-2026-grupo-tragsa.aspx"
+    },
+    {
+     "fecha": "2026-10-09",
+     "titulo": "SE PUBLICA UNA CORRECCIÓN DE ERRORES EN ANEXOS ESPECÍFICOS DE LA TASA DE REPOSICIÓN ESPECÍFICA 2026 DE LA EMPRESA TRAGSATEC PUBLICADOS EL DÍA 8 DE OCTUBRE DE 2026.",
+     "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasas-reposicion-especifica-2025-2026/Paginas/tre-2026-grupo-tragsa.aspx"
+    }
+   ]
+  },
+  {
+   "id": "7cce9f7665",
+   "organismo": "tragsa",
+   "nombre": "Tasa de reposición 2025-2026 puestos PRE de Tragsatec",
+   "tipo": "tasa",
+   "acceso": "libre",
+   "tipo_contrato": "indefinido",
+   "sistema": "concurso-oposicion",
+   "estado": "curso",
+   "plazo_fin": null,
+   "plazo_hora": null,
+   "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasa-reposicion-2025-2026-puestos-pre-tragsatec/Paginas/default.aspx",
+   "url_inscripcion": null,
+   "comunicados": [
+    {
+     "fecha": "2026-11-05",
+     "titulo": "Publicación de los listados actualizados de acceso a la prueba oral técnico competencial de las personas candidatas admitidas en el proceso selectivo para la cobertura de puestos de trabajo incluidos en la tasa de reposición de los años 2025 Y 2026 de puestos de especial responsabilidad (puestos PRE), intermedios de gestión y de la carrera del especialista/especialización de la empresa Tecnologías y Servicios Agrarios (Tragsatec).",
+     "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasa-reposicion-2025-2026-puestos-pre-tragsatec/Paginas/default.aspx"
+    },
+    {
+     "fecha": "2026-10-28",
+     "titulo": "Publicación de los acuerdos del Órgano de Selección por los que se modifica la ratio del número de personas convocadas a la prueba oral técnico competencial y se aprueban las calificaciones definitivas de méritos de la personas candidatas [código omitido] admitida en el puesto de trabajo TRO26-TRAGSATEC-184, [código omitido] admitida en el puesto de trabajo TRO26 TRAGSATEC-187, y, [código omitido] admitida en el puesto de trabajo TRO 26 TRAGSATEC- 187, del proceso selectivo para la cobertura de puestos de trabajo incluidos en la tasa de reposición de los años 2025 y 2026 de puestos de especial responsabilidad (puestos PRE), intermedios de gestión y de la carrera del especialista / especialización, de la empresa Tecnologías y Servicios Agrarios (Tragsatec).",
+     "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasa-reposicion-2025-2026-puestos-pre-tragsatec/Paginas/default.aspx"
+    },
+    {
+     "fecha": "2026-10-07",
+     "titulo": "Publicación de las calificaciones definitivas de méritos de las personas admitidas en el proceso selectivo para la cobertura de puestos de trabajo incluidos en la tasa de reposición de los años 2025 y 2026 de puestos de especial responsabilidad (puestos PRE), intermedios de gestión y de la carrera del especialista / especialización, de la empresa Tecnologías y Servicios Agrarios (Tragsatec).",
+     "url": "https://www.tragsa.es/es/equipo-humano/unete-a-nuestro-equipo/ofertas-empleo-indefinido/tasa-reposicion-2025-2026-puestos-pre-tragsatec/Paginas/default.aspx"
+    }
+   ]
+  },
+  {
+   "id": "4a5651382f",
+   "organismo": "cetarsa",
+   "nombre": "Técnico/a de Producción Agrícola- Clasificador/a Industrial · Promoción interna",
+   "tipo": "otro",
+   "acceso": "interna",
+   "tipo_contrato": "indefinido",
+   "sistema": "concurso-oposicion",
+   "estado": "curso",
+   "plazo_fin": null,
+   "plazo_hora": null,
+   "url": "https://www.cetarsa.es/empleo-2026/",
+   "url_inscripcion": null,
+   "comunicados": [
+    {
+     "fecha": "2026-11-09",
+     "titulo": "Fase I – Listado Definitivo de Valoraciones para la cobertura de tres (3) puestos de trabajo de Técnico/a de Producción Agrícola – Clasificador/a Industrial",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-11-05",
+     "titulo": "Examen de FASE II – Oposición 10 de Noviembre de 2026 – 10.00h en el Centro de CETARSA en Navalmoral de la Mata. (Recordamos que los/as candidatos/as deberán asistir con su oportuna documentación acreditativa (DNI, NIE, Pasaporte, etc.), y bolígrafo)",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-11-05",
+     "titulo": "Examen de FASE II – Oposición 10 de Noviembre de 2026 – 10.00h en el Centro de CETARSA en Talayuela. (Recordamos que los/as candidatos/as deberán asistir con su oportuna documentación acreditativa (DNI, NIE, Pasaporte, etc.), y bolígrafo)",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-30",
+     "titulo": "Se establece plazo de reclamaciones hasta el 9 de Noviembre a las 14:30 horas del 2026 en el Centro de Trabajo de CETARSA en Navalmoral.",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-30",
+     "titulo": "Fase I – Listado Provisional de Valoraciones para la cobertura de tres (3) puestos de trabajo de Técnico/a de Producción Agrícola – Clasificador/a Industrial",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-29",
+     "titulo": "Entrevista Personal – Fase I para la cobertura de tres (3) puestos de trabajo de Técnico/a de Producción Agrícola – Clasificador/a Industrial",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-29",
+     "titulo": "Listado definitivo de la convocatoria para la cobertura de tres (3) puestos de trabajo de Técnico/a de Producción Agrícola – Clasificador/a Industrial",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-23",
+     "titulo": "Se establece plazo de reclamaciones hasta el 29 de Octubre a las 14:30 horas del 2026 en el Centro de Trabajo de CETARSA en Navalmoral.",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-23",
+     "titulo": "Listado provisional de admitidos para la cobertura de tres (3) puestos de trabajo de Técnico/a de Producción Agrícola – Clasificador/a Industrial",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    },
+    {
+     "fecha": "2026-10-06",
+     "titulo": "Se establece plazo de solicitudes hasta el 22 de Octubre a las 14:00 horas del 2026 en el Centro de Trabajo de CETARSA en Navalmoral",
+     "url": "https://www.cetarsa.es/empleo-2026/"
+    }
+   ]
+  }
+ ]
+}

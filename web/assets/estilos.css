@@ -1,0 +1,181 @@
+/* Paleta propia (no la de Tragsa). Claro u oscuro según el sistema.
+   tests/test_generar.py comprueba un contraste de 4,5:1 en los dos bloques que definen --ink. */
+:root {
+  color-scheme: light;
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --ink: #1f1d22;
+  --muted: #4d4853;
+  --line: #d3cfd8;
+  --accent: #5b2a72;
+  --accent-ink: #ffffff;
+  --alert: #8a3100;
+  --alert-bg: #fdeedd;
+  --franja: #f1eaf5;
+  --focus: #0b57d0;
+  --ff: Atkinson Hyperlegible, Verdana, "DejaVu Sans", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #151318;
+    --surface: #1e1b22;
+    --ink: #f0eef2;
+    --muted: #c3bdc9;
+    --line: #48424f;
+    --accent: #dcb6f0;
+    --accent-ink: #1c1022;
+    --alert: #ffc592;
+    --alert-bg: #3b2615;
+    --franja: #2a2230;
+    --focus: #9cc2ff;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { font-size: 112.5%; -webkit-text-size-adjust: 100%; background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--ff); line-height: 1.6; overflow-wrap: anywhere; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 3px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 1.9rem; margin: 0 0 0.5rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 0.4rem; }
+h3 { font-size: 1.05rem; margin: 1.4rem 0 0.3rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.salto { position: absolute; left: 1rem; top: -4rem; padding: 0.6rem 1rem; background: var(--accent); color: var(--accent-ink); z-index: 30; }
+.salto:focus { top: 0.5rem; }
+.ancho { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+/* Franja «web independiente», en todas las páginas. */
+.franja { background: var(--franja); border-bottom: 1px solid var(--line); font-size: 0.9rem; }
+.franja p { margin: 0; padding: 0.45rem 0; }
+
+/* Cabecera: marca y menú; en pantallas estrechas el menú baja a su propia fila. */
+header.sitio { border-bottom: 1px solid var(--line); background: var(--surface); }
+.cab { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0 1rem; min-height: 3.25rem; }
+.marca { align-self: center; font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; padding: 0.4rem 0; }
+nav.principal { flex: 1 1 auto; display: flex; }
+nav.principal ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0 0.1rem; padding: 0; margin: 0; }
+nav.principal a {
+  display: flex; align-items: center; height: 100%; min-height: 44px; padding: 0.4rem 0.5rem; color: var(--ink);
+  font-size: 0.95rem; text-decoration: none; border-bottom: 4px solid transparent;
+}
+nav.principal a:hover { border-color: var(--line); }
+nav.principal a[aria-current="page"] { font-weight: 700; border-color: var(--accent); }
+@media (max-width: 42em) {
+  nav.principal { flex-basis: 100%; }
+  nav.principal a { min-height: 40px; padding: 0.3rem 0.5rem; }
+}
+
+main.ancho { padding-top: 1rem; padding-bottom: 3rem; }
+main > h2 { padding-bottom: 0.3rem; border-bottom: 2px solid var(--line); }
+.resumen { color: var(--muted); margin: 0 0 1rem; }
+.nota { border-left: 4px solid var(--accent); background: var(--surface); padding: 0.7rem 1rem; margin: 1rem 0; }
+.nota > :first-child { margin-top: 0; }
+.nota > :last-child { margin-bottom: 0; }
+.nota ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+.aviso-corto, .saltos { margin: 0.5rem 0; }
+.dato { color: var(--muted); font-size: 0.95rem; }
+.urgente { color: var(--alert); background: var(--alert-bg); padding: 0 0.4rem; border-radius: 4px; font-weight: 700; }
+
+/* Ruta de migas. */
+.migas ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0 0.4rem; padding: 0; margin: 0 0 0.6rem; font-size: 0.95rem; }
+.migas li + li::before { content: "›"; content: "›" / ""; margin-right: 0.4rem; color: var(--muted); }
+.migas a { display: inline-flex; align-items: center; min-height: 44px; }
+.migas [aria-current] { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); }
+
+/* Buscador, pastillas y panel de filtros (filtros.js). */
+form.filtros { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0 0.9rem; }
+.buscador { display: flex; gap: 0.5rem; }
+.buscador input[type="search"] {
+  flex: 1; min-width: 0; min-height: 52px; padding: 0.5rem 0.9rem; font-size: 1.1rem;
+  border: 2px solid var(--muted); border-radius: 8px; background: var(--surface);
+}
+.buscador input::placeholder { color: var(--muted); opacity: 1; }
+.buscador button { min-height: 52px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.pastillas { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+.pastilla {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 36px; padding: 0.15rem 0.75rem;
+  font: inherit; cursor: pointer; color: var(--ink); background: var(--surface); border: 1px solid var(--muted); border-radius: 999px;
+}
+.pastilla input { width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--accent); }
+.pastilla:has(input:checked), .pastilla[aria-expanded="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+#btn-filtros::after { content: "▾"; margin-left: -0.15rem; }
+#btn-filtros[aria-expanded="true"]::after { content: "▴"; }
+.orden { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
+.orden select { width: auto; min-height: 36px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; }
+.rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.8rem 1rem; }
+.campo { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.campo label { font-weight: 600; }
+input[type="search"], select {
+  width: 100%; min-height: 44px; padding: 0.4rem 0.6rem; font: inherit;
+  color: var(--ink); background: var(--bg); border: 1px solid var(--muted); border-radius: 4px;
+}
+button {
+  min-height: 44px; padding: 0.4rem 1rem; font: inherit; font-weight: 600; cursor: pointer;
+  color: var(--ink); background: transparent; border: 2px solid var(--muted); border-radius: 6px;
+}
+.quitar { border: 0; padding: 0.3rem 0.5rem; color: var(--accent); text-decoration: underline; text-underline-offset: 0.18em; }
+.resultados { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 1rem; margin-bottom: 0.6rem; }
+#estado-filtros { font-weight: 600; min-height: 1.6em; margin: 0; }
+@media (max-width: 34em) {
+  .buscador input[type="search"] { font-size: 1rem; padding: 0.5rem 0.6rem; }
+  .buscador button { padding: 0.4rem 0.6rem; font-size: 0.95rem; }
+  .orden { margin-left: 0; flex: 1 1 100%; }
+  .orden select { flex: 1; }
+}
+
+/* Tarjetas de ofertas y de procesos. */
+.ofertas { list-style: none; margin: 0; padding: 0; }
+.ofertas > li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+.ofertas h2 { font-size: 1.1rem; margin: 0 0 0.3rem; font-weight: 600; }
+.ofertas h2 a { text-decoration: none; }
+.ofertas h2 a:is(:hover, :focus-visible) { text-decoration: underline; }
+.ofertas p { margin: 0.1rem 0; }
+.acciones-oferta a { display: inline-flex; align-items: center; min-height: 36px; font-weight: 600; }
+.procesos > li { border-left: 4px solid var(--accent); }
+
+/* Listas de enlaces por comunidad, provincia y área: varias columnas. */
+.enlaces { list-style: none; padding: 0; margin: 0.3rem 0 1rem; columns: 15rem auto; column-gap: 1.5rem; }
+.enlaces li { break-inside: avoid; }
+.enlaces a { display: inline-flex; align-items: center; min-height: 40px; }
+section.explorar { margin-top: 2.5rem; }
+section.explorar > h2 { padding-bottom: 0.3rem; border-bottom: 2px solid var(--line); }
+
+/* Ficha de un proceso. */
+dl.ficha {
+  display: grid; grid-template-columns: minmax(9rem, max-content) 1fr; gap: 0.3rem 1rem;
+  margin: 1rem 0; padding: 0.9rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+}
+dl.ficha dt { font-weight: 600; }
+dl.ficha dd { margin: 0; }
+.acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.25rem; margin: 1.25rem 0; }
+.boton {
+  display: inline-block; padding: 0.65rem 1.2rem; min-height: 44px; font-weight: 700;
+  background: var(--accent); color: var(--accent-ink); text-decoration: none; border-radius: 6px;
+}
+.boton:hover { text-decoration: underline; }
+.comunicados-lista { padding-left: 1.3rem; }
+.comunicados-lista li { margin-bottom: 0.5rem; }
+@media (max-width: 34em) {
+  dl.ficha { grid-template-columns: 1fr; }
+  dl.ficha dd { margin-bottom: 0.5rem; }
+  h1 { font-size: 1.55rem; }
+}
+
+/* Avisos: accesos grandes. */
+.vias { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 0.8rem; }
+.vias a {
+  display: flex; flex-direction: column; gap: 0.25rem; height: 100%; padding: 0.9rem 1.1rem;
+  color: var(--ink); text-decoration: none; background: var(--surface); border: 2px solid var(--line); border-radius: 8px;
+}
+.vias a:hover { border-color: var(--accent); }
+.vias strong { color: var(--accent); font-size: 1.15rem; text-decoration: underline; text-underline-offset: 0.18em; }
+
+footer.sitio { border-top: 1px solid var(--line); color: var(--muted); padding: 1.2rem 0 2.5rem; font-size: 0.9rem; }
+footer.sitio a { color: inherit; }
+footer.sitio p { margin: 0.4rem 0; }
+footer.sitio .subir a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--accent); }

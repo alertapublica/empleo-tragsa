@@ -1,0 +1,78 @@
+name: Publicar
+
+# Genera la web a partir de la API de alertapublica.es y la publica en GitHub Pages.
+# - Al publicar, el portal lanza este workflow con la hora «generado» de su API (secreto
+#   TOKEN_WEB_TRAGSA en alertapublica/empleo-publico-abierto).
+# - El cron es el respaldo por si no llega ese aviso.
+# - Al cambiar el código (push a main) se publica siempre.
+on:
+  workflow_dispatch:
+    inputs:
+      generado:
+        description: "Hora «generado» de la API que acaba de publicar el portal (vacío: la que haya)"
+        required: false
+        default: ""
+  schedule:
+    - cron: "40 */3 * * *"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      publicar: ${{ steps.cambios.outputs.publicar }}
+    env:
+      # Variable del repo con el dominio propio (https://…/). Vacía: la dirección de GitHub Pages.
+      BASE_URL: ${{ vars.BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Generar la web
+        env:
+          ESPERAR: ${{ inputs.generado }}
+        run: python -m web --esperar "$ESPERAR"
+      # Sin datos nuevos y en el mismo día (los textos «Finaliza hoy» dependen de la fecha), no se vuelve
+      # a publicar. Si no se puede leer la web publicada, se publica.
+      - name: ¿Hay cambios?
+        id: cambios
+        run: |
+          url="${BASE_URL:-https://alertapublica.github.io/empleo-tragsa/}"
+          publicado=$(curl -fsSL --max-time 30 "${url%/}/estado.json" | jq -c '{generado, fecha}' 2>/dev/null || echo "")
+          nuevo=$(jq -c '{generado, fecha}' _site/estado.json)
+          if [ "$GITHUB_EVENT_NAME" != "push" ] && [ "$publicado" = "$nuevo" ]; then
+            echo "Sin cambios: $nuevo"
+            echo "publicar=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "Publicado: ${publicado:-ninguno} · nuevo: $nuevo"
+            echo "publicar=si" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.cambios.outputs.publicar == 'si'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  desplegar:
+    needs: generar
+    if: needs.generar.outputs.publicar == 'si'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

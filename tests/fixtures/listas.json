@@ -1,0 +1,729 @@
+{
+ "version": 1,
+ "licencia": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.es). Los textos y enlaces de cada oferta y comunicado pertenecen a su organismo.",
+ "documentacion": "https://alertapublica.es/datos/",
+ "generado": "2026-11-09T22:12:28+00:00",
+ "comunidades": [
+  {
+   "ccaa": "01",
+   "nombre": "Andalucía"
+  },
+  {
+   "ccaa": "02",
+   "nombre": "Aragón"
+  },
+  {
+   "ccaa": "03",
+   "nombre": "Asturias"
+  },
+  {
+   "ccaa": "04",
+   "nombre": "Illes Balears"
+  },
+  {
+   "ccaa": "05",
+   "nombre": "Canarias"
+  },
+  {
+   "ccaa": "06",
+   "nombre": "Cantabria"
+  },
+  {
+   "ccaa": "07",
+   "nombre": "Castilla y León"
+  },
+  {
+   "ccaa": "08",
+   "nombre": "Castilla-La Mancha"
+  },
+  {
+   "ccaa": "09",
+   "nombre": "Cataluña"
+  },
+  {
+   "ccaa": "10",
+   "nombre": "Comunitat Valenciana"
+  },
+  {
+   "ccaa": "11",
+   "nombre": "Extremadura"
+  },
+  {
+   "ccaa": "12",
+   "nombre": "Galicia"
+  },
+  {
+   "ccaa": "13",
+   "nombre": "Comunidad de Madrid"
+  },
+  {
+   "ccaa": "14",
+   "nombre": "Región de Murcia"
+  },
+  {
+   "ccaa": "15",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  {
+   "ccaa": "16",
+   "nombre": "País Vasco"
+  },
+  {
+   "ccaa": "17",
+   "nombre": "La Rioja"
+  },
+  {
+   "ccaa": "18",
+   "nombre": "Ceuta"
+  },
+  {
+   "ccaa": "19",
+   "nombre": "Melilla"
+  }
+ ],
+ "provincias": [
+  {
+   "provincia": "01",
+   "nombre": "Álava",
+   "ccaa": "16"
+  },
+  {
+   "provincia": "02",
+   "nombre": "Albacete",
+   "ccaa": "08"
+  },
+  {
+   "provincia": "03",
+   "nombre": "Alicante",
+   "ccaa": "10"
+  },
+  {
+   "provincia": "04",
+   "nombre": "Almería",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "05",
+   "nombre": "Ávila",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "06",
+   "nombre": "Badajoz",
+   "ccaa": "11"
+  },
+  {
+   "provincia": "07",
+   "nombre": "Illes Balears",
+   "ccaa": "04"
+  },
+  {
+   "provincia": "08",
+   "nombre": "Barcelona",
+   "ccaa": "09"
+  },
+  {
+   "provincia": "09",
+   "nombre": "Burgos",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "10",
+   "nombre": "Cáceres",
+   "ccaa": "11"
+  },
+  {
+   "provincia": "11",
+   "nombre": "Cádiz",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "12",
+   "nombre": "Castellón",
+   "ccaa": "10"
+  },
+  {
+   "provincia": "13",
+   "nombre": "Ciudad Real",
+   "ccaa": "08"
+  },
+  {
+   "provincia": "14",
+   "nombre": "Córdoba",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "15",
+   "nombre": "A Coruña",
+   "ccaa": "12"
+  },
+  {
+   "provincia": "16",
+   "nombre": "Cuenca",
+   "ccaa": "08"
+  },
+  {
+   "provincia": "17",
+   "nombre": "Girona",
+   "ccaa": "09"
+  },
+  {
+   "provincia": "18",
+   "nombre": "Granada",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "19",
+   "nombre": "Guadalajara",
+   "ccaa": "08"
+  },
+  {
+   "provincia": "20",
+   "nombre": "Gipuzkoa",
+   "ccaa": "16"
+  },
+  {
+   "provincia": "21",
+   "nombre": "Huelva",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "22",
+   "nombre": "Huesca",
+   "ccaa": "02"
+  },
+  {
+   "provincia": "23",
+   "nombre": "Jaén",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "24",
+   "nombre": "León",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "25",
+   "nombre": "Lleida",
+   "ccaa": "09"
+  },
+  {
+   "provincia": "26",
+   "nombre": "La Rioja",
+   "ccaa": "17"
+  },
+  {
+   "provincia": "27",
+   "nombre": "Lugo",
+   "ccaa": "12"
+  },
+  {
+   "provincia": "28",
+   "nombre": "Madrid",
+   "ccaa": "13"
+  },
+  {
+   "provincia": "29",
+   "nombre": "Málaga",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "30",
+   "nombre": "Murcia",
+   "ccaa": "14"
+  },
+  {
+   "provincia": "31",
+   "nombre": "Navarra",
+   "ccaa": "15"
+  },
+  {
+   "provincia": "32",
+   "nombre": "Ourense",
+   "ccaa": "12"
+  },
+  {
+   "provincia": "33",
+   "nombre": "Asturias",
+   "ccaa": "03"
+  },
+  {
+   "provincia": "34",
+   "nombre": "Palencia",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "35",
+   "nombre": "Las Palmas",
+   "ccaa": "05"
+  },
+  {
+   "provincia": "36",
+   "nombre": "Pontevedra",
+   "ccaa": "12"
+  },
+  {
+   "provincia": "37",
+   "nombre": "Salamanca",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "38",
+   "nombre": "Santa Cruz de Tenerife",
+   "ccaa": "05"
+  },
+  {
+   "provincia": "39",
+   "nombre": "Cantabria",
+   "ccaa": "06"
+  },
+  {
+   "provincia": "40",
+   "nombre": "Segovia",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "41",
+   "nombre": "Sevilla",
+   "ccaa": "01"
+  },
+  {
+   "provincia": "42",
+   "nombre": "Soria",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "43",
+   "nombre": "Tarragona",
+   "ccaa": "09"
+  },
+  {
+   "provincia": "44",
+   "nombre": "Teruel",
+   "ccaa": "02"
+  },
+  {
+   "provincia": "45",
+   "nombre": "Toledo",
+   "ccaa": "08"
+  },
+  {
+   "provincia": "46",
+   "nombre": "Valencia",
+   "ccaa": "10"
+  },
+  {
+   "provincia": "47",
+   "nombre": "Valladolid",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "48",
+   "nombre": "Bizkaia",
+   "ccaa": "16"
+  },
+  {
+   "provincia": "49",
+   "nombre": "Zamora",
+   "ccaa": "07"
+  },
+  {
+   "provincia": "50",
+   "nombre": "Zaragoza",
+   "ccaa": "02"
+  },
+  {
+   "provincia": "51",
+   "nombre": "Ceuta",
+   "ccaa": "18"
+  },
+  {
+   "provincia": "52",
+   "nombre": "Melilla",
+   "ccaa": "19"
+  }
+ ],
+ "organismos": [
+  {
+   "id": "sepi",
+   "nombre": "SEPI",
+   "grupo": "sepi"
+  },
+  {
+   "id": "tragsa",
+   "nombre": "Grupo Tragsa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "efe",
+   "nombre": "Agencia EFE",
+   "grupo": "sepi"
+  },
+  {
+   "id": "correos",
+   "nombre": "Grupo Correos",
+   "grupo": "sepi"
+  },
+  {
+   "id": "navantia",
+   "nombre": "Navantia",
+   "grupo": "sepi"
+  },
+  {
+   "id": "enusa",
+   "nombre": "Enusa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "rtve",
+   "nombre": "Corporación RTVE",
+   "grupo": "sepi"
+  },
+  {
+   "id": "enresa",
+   "nombre": "Enresa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "etsa",
+   "nombre": "ETSA",
+   "grupo": "sepi"
+  },
+  {
+   "id": "cetarsa",
+   "nombre": "Cetarsa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "cofivacasa",
+   "nombre": "Cofivacasa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "zarzuela",
+   "nombre": "Hipódromo de la Zarzuela",
+   "grupo": "sepi"
+  },
+  {
+   "id": "mercasa",
+   "nombre": "Mercasa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "hunosa",
+   "nombre": "Grupo Hunosa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "sepides",
+   "nombre": "Sepides",
+   "grupo": "sepi"
+  },
+  {
+   "id": "mayasa",
+   "nombre": "Mayasa",
+   "grupo": "sepi"
+  },
+  {
+   "id": "enaire",
+   "nombre": "ENAIRE",
+   "grupo": "estatal"
+  },
+  {
+   "id": "aena",
+   "nombre": "Aena",
+   "grupo": "estatal"
+  },
+  {
+   "id": "puertos",
+   "nombre": "Puertos del Estado",
+   "grupo": "estatal"
+  },
+  {
+   "id": "senasa",
+   "nombre": "SENASA",
+   "grupo": "estatal"
+  },
+  {
+   "id": "isdefe",
+   "nombre": "ISDEFE",
+   "grupo": "estatal"
+  },
+  {
+   "id": "fnmt",
+   "nombre": "FNMT-RCM",
+   "grupo": "estatal"
+  },
+  {
+   "id": "adif",
+   "nombre": "ADIF y ADIF Alta Velocidad",
+   "grupo": "estatal"
+  },
+  {
+   "id": "renfe",
+   "nombre": "Renfe",
+   "grupo": "estatal"
+  },
+  {
+   "id": "fgc",
+   "nombre": "FGC",
+   "grupo": "autonomica"
+  },
+  {
+   "id": "gpex",
+   "nombre": "GPEX (Gestión Pública de Extremadura)",
+   "grupo": "autonomica"
+  },
+  {
+   "id": "gesplan",
+   "nombre": "GESPLAN",
+   "grupo": "autonomica"
+  },
+  {
+   "id": "sarga",
+   "nombre": "SARGA",
+   "grupo": "autonomica"
+  },
+  {
+   "id": "serpa",
+   "nombre": "SERPA",
+   "grupo": "autonomica"
+  },
+  {
+   "id": "canal",
+   "nombre": "Canal de Isabel II",
+   "grupo": "autonomica"
+  },
+  {
+   "id": "idibell",
+   "nombre": "IDIBELL",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "fisabio",
+   "nombre": "FISABIO",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "idival",
+   "nombre": "IDIVAL",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "idisna",
+   "nombre": "IdiSNA",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "ibsal",
+   "nombre": "IBSAL (FIBSAL)",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "navarrabiomed",
+   "nombre": "Navarrabiomed (Fundación Miguel Servet)",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "fundesalud",
+   "nombre": "FUNDESALUD",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "lafe",
+   "nombre": "IIS La Fe",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "ciqus",
+   "nombre": "CiQUS (USC)",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "cimus",
+   "nombre": "CiMUS (USC)",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "fisevi",
+   "nombre": "FISEVI",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "imib",
+   "nombre": "IMIB (FFIS)",
+   "grupo": "investigacion"
+  },
+  {
+   "id": "irycis",
+   "nombre": "IRYCIS",
+   "grupo": "investigacion"
+  }
+ ],
+ "areas": [
+  {
+   "id": "ambiente",
+   "nombre": "Medio ambiente, agro y pesca"
+  },
+  {
+   "id": "obras",
+   "nombre": "Construcción, obras y arquitectura"
+  },
+  {
+   "id": "ingenieria",
+   "nombre": "Ingeniería industrial y energía"
+  },
+  {
+   "id": "aeroespacial",
+   "nombre": "Aeronáutica, espacio y defensa"
+  },
+  {
+   "id": "tic",
+   "nombre": "Informática y telecomunicaciones"
+  },
+  {
+   "id": "admin",
+   "nombre": "Administración y gestión"
+  },
+  {
+   "id": "economia",
+   "nombre": "Economía, finanzas y estadística"
+  },
+  {
+   "id": "juridico",
+   "nombre": "Jurídico"
+  },
+  {
+   "id": "personas",
+   "nombre": "Recursos humanos, formación y PRL"
+  },
+  {
+   "id": "investigacion",
+   "nombre": "Investigación y laboratorio"
+  },
+  {
+   "id": "sanidad",
+   "nombre": "Sanidad"
+  },
+  {
+   "id": "transporte",
+   "nombre": "Transporte, náutica y logística"
+  },
+  {
+   "id": "oficios",
+   "nombre": "Oficios, operarios y mantenimiento"
+  },
+  {
+   "id": "comunicacion",
+   "nombre": "Comunicación, audiovisual y cultura"
+  },
+  {
+   "id": "comercial",
+   "nombre": "Comercial y atención al público"
+  },
+  {
+   "id": "seguridad",
+   "nombre": "Seguridad y emergencias"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "sepi",
+   "nombre": "Grupo SEPI"
+  },
+  {
+   "id": "estatal",
+   "nombre": "Otras empresas del Estado"
+  },
+  {
+   "id": "autonomica",
+   "nombre": "Empresas públicas autonómicas"
+  },
+  {
+   "id": "investigacion",
+   "nombre": "Fundaciones y centros de investigación"
+  }
+ ],
+ "tipos_contrato": [
+  {
+   "id": "temporal",
+   "nombre": "Temporal"
+  },
+  {
+   "id": "indefinido",
+   "nombre": "Indefinido"
+  },
+  {
+   "id": "practicas",
+   "nombre": "Prácticas"
+  },
+  {
+   "id": "beca",
+   "nombre": "Beca"
+  },
+  {
+   "id": "bolsa",
+   "nombre": "Bolsa de empleo"
+  }
+ ],
+ "tipos_proceso": [
+  {
+   "id": "tasa",
+   "nombre": "Tasa de reposición"
+  },
+  {
+   "id": "oep",
+   "nombre": "Oferta de empleo público"
+  },
+  {
+   "id": "bolsa",
+   "nombre": "Bolsa de empleo"
+  },
+  {
+   "id": "otro",
+   "nombre": "Proceso selectivo"
+  }
+ ],
+ "accesos": [
+  {
+   "id": "libre",
+   "nombre": "Acceso libre"
+  },
+  {
+   "id": "interna",
+   "nombre": "Promoción interna"
+  }
+ ],
+ "sistemas": [
+  {
+   "id": "concurso-oposicion",
+   "nombre": "Concurso-oposición"
+  },
+  {
+   "id": "oposicion",
+   "nombre": "Oposición"
+  },
+  {
+   "id": "concurso",
+   "nombre": "Concurso de méritos"
+  }
+ ],
+ "estados_proceso": [
+  {
+   "id": "abierto",
+   "nombre": "Inscripción abierta"
+  },
+  {
+   "id": "curso",
+   "nombre": "En curso"
+  },
+  {
+   "id": "finalizado",
+   "nombre": "Finalizado"
+  },
+  {
+   "id": "retirado",
+   "nombre": "Sin novedades en la web oficial"
+  }
+ ]
+}

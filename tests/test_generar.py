@@ -282,11 +282,11 @@ class Colores(unittest.TestCase):
     def test_contraste_de_la_paleta(self):
         css = (generar.ASSETS / "estilos.css").read_text(encoding="utf-8")
         blocks = re.findall(r"\{([^{}]*--ink:[^{}]*)\}", css)
-        self.assertEqual(len(blocks), 2)  # claro y oscuro
+        self.assertEqual(len(blocks), 5)  # sistema oscuro, claro (base), oscuro, sepia y contraste alto
         for block in blocks:
             v = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", block))
-            pairs = [("ink", "bg"), ("ink", "surface"), ("ink", "franja"), ("muted", "bg"), ("muted", "surface"),
-                     ("accent", "bg"), ("accent", "surface"), ("accent", "franja"), ("accent-ink", "accent"),
+            pairs = [("ink", "bg"), ("ink", "surface"), ("muted", "bg"), ("muted", "surface"),
+                     ("accent", "bg"), ("accent", "surface"), ("accent-ink", "accent"),
                      ("alert", "alert-bg")]
             for fg, bg in pairs:
                 self.assertGreaterEqual(contrast(v[fg], v[bg]), 4.5, f"{fg} sobre {bg}: {v[fg]} / {v[bg]}")

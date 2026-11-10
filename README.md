@@ -15,7 +15,7 @@ alertapublica.es/api/ (ofertas, procesos, listas)  →  python -m web  →  _sit
 ```
 
 - **Los datos no se calculan aquí.** Salen de la [API de Empleo en Empresas Públicas](https://alertapublica.es/datos/) ([repo](https://github.com/alertapublica/empleo-publico-abierto)), que ya trae los códigos INE, las áreas y la mención del teletrabajo. Se filtra `organismo == "tragsa"` y se genera HTML estático, para que los buscadores lo indexen.
-- **Sin fichas propias.** El título de cada oferta abre su ficha en tragsa.es e «Inscribirse» lleva al Portal de Empleo de Tragsa. Así no se duplica contenido.
+- **Sin fichas propias.** El título de cada oferta abre su ficha en tragsa.es e «Inscribirse» lleva al Portal de Empleo de Tragsa, los dos en una pestaña nueva. Así no se duplica contenido.
 - **Páginas que aparecen y desaparecen.** Cada comunidad, provincia y área tiene página solo mientras haya ofertas abiertas. Al vaciarse, la página desaparece (404) y sale del `sitemap.xml`.
 - **Avisos.** No se gestionan aquí. Se enlaza al portal: `alertapublica.es/avisos/?organismo=tragsa` para el correo y `t.me/<bot>?start=tragsa` para Telegram, los dos con Tragsa ya elegido.
 - **Sin dependencias.** Solo la biblioteca estándar de Python, sin cookies, sin analítica y sin recursos externos (CSP estricta).

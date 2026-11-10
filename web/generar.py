@@ -34,7 +34,7 @@ PORTAL = "https://alertapublica.es/"
 PORTAL_NOMBRE = "Empleo en Empresas Públicas"
 # Mismo titular que el portal (LSSI art. 10).
 TITULAR = "Voceiro - JJAA"
-CONTACTO = "info@voceiro.eu"
+CONTACTO = "legal@alertapublica.es"
 DEFAULT_BASE_URL = "https://alertapublica.github.io/empleo-tragsa/"
 DEFAULT_API = "https://alertapublica.es/api/"
 DEFAULT_BOT = "empleo_aapp_bot"

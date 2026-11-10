@@ -55,7 +55,7 @@ En los dos primeros casos no se vuelve a publicar si la web publicada ya tiene e
    - guardarlo como secreto `TOKEN_WEB_TRAGSA` en `alertapublica/empleo-publico-abierto`.
 
    Sin él, la web solo se actualiza con el cron. Los tokens de grano fino caducan: al renovarlo, hay que volver a guardarlo en ese secreto.
-4. **Buzón de reclamaciones** (pendiente del dominio): de momento es el correo del titular (`CONTACTO` en [`web/generar.py`](web/generar.py)). Con el dominio se puede crear `reclamaciones@<dominio>` con el reenvío de correo de Cloudflare y cambiarlo ahí.
+4. **Buzón de reclamaciones** (hecho): `legal@alertapublica.es` (`CONTACTO` en [`web/generar.py`](web/generar.py)), el mismo del portal. Sirve para reclamaciones, contacto y accesibilidad.
 
 Otras variables opcionales del generador: `API_URL` (otra API o una carpeta local) y `TELEGRAM_BOT` (usuario del bot, sin @; por defecto `empleo_aapp_bot`, el mismo del portal).
 

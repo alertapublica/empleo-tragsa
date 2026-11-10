@@ -16,6 +16,7 @@ from datetime import date, datetime, timezone
 from html import escape as e
 from pathlib import Path
 from urllib.parse import quote
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 
 from . import datos
@@ -176,6 +177,61 @@ def unique_slugs(processes: list[dict]) -> dict[str, str]:
 
 # ---------------------------------------------------------------- plantilla
 
+def radios(name: str, options: list[tuple[str, str]]) -> str:
+    return "".join(
+        f'<div class="opcion"><input type="radio" id="{name}-{value}" name="{name}" value="{value}">'
+        f'<label for="{name}-{value}">{label}</label></div>'
+        for value, label in options
+    )
+
+
+def color_row(key: str, label: str, contrast: bool = True) -> str:
+    check = f'<output id="contraste-{key}" for="color-{key}"></output>' if contrast else ""
+    return (f'<div class="color-fila"><input type="color" id="color-{key}" value="#000000">'
+            f'<label for="color-{key}">{label}</label>{check}</div>')
+
+
+# Mismo panel «Aa» que Empleo en Empresas Públicas (tema.js y ajustes.js son copias de los suyos).
+SETTINGS_DIALOG = f"""<dialog id="ajustes" class="ajustes" aria-labelledby="ajustes-titulo">
+<div class="aj-cab"><h2 id="ajustes-titulo">Apariencia</h2>
+<button type="button" id="ajustes-cerrar">Cerrar</button></div>
+<div class="aj-cuerpo">
+<fieldset><legend>Tema</legend>
+<div class="opciones">{radios("tema", [("auto", "Automático"), ("light", "Claro"), ("sepia", "Sepia"),
+                                       ("dark", "Oscuro"), ("contrast", "Contraste alto"), ("custom", "Personalizado")])}</div>
+<p class="aj-nota">La opción Automático aplica el tema configurado en su dispositivo.</p>
+<div class="colores" id="colores" hidden>
+{color_row("fondo", "Fondo", False)}{color_row("texto", "Texto")}{color_row("enlaces", "Enlaces")}{color_row("titulos", "Títulos")}
+<p class="aj-nota">Seleccione cuatro colores; el resto se calcula de forma automática. Se indica si alguno no alcanza un contraste de 4,5:1 con el fondo.</p>
+</div></fieldset>
+<fieldset><legend>Letra</legend>
+<div class="opciones">{radios("fuente", [("sans", "Sans"), ("serif", "Serif"), ("dyslexic", "Dislexia")])}</div>
+</fieldset>
+<fieldset><legend>Tamaño de letra</legend>
+<div class="paso"><button type="button" id="fs-menos" aria-label="A menos: reducir el tamaño de letra">A−</button>
+<output id="fs-val" for="fs-menos fs-mas"></output>
+<button type="button" id="fs-mas" aria-label="A más: aumentar el tamaño de letra">A+</button></div>
+<p class="aj-nota">Porcentaje sobre el tamaño de letra configurado en su navegador.</p>
+</fieldset>
+<fieldset><legend>Ancho del contenido</legend>
+<div class="paso"><button type="button" id="ancho-menos" aria-label="Reducir el ancho del contenido">−</button>
+<output id="ancho-val" for="ancho-menos ancho-mas"></output>
+<button type="button" id="ancho-mas" aria-label="Aumentar el ancho del contenido">+</button></div>
+</fieldset>
+<fieldset><legend>Ayudas de lectura</legend>
+<label class="casilla-ajuste"><input type="checkbox" name="extra" value="just"><span>Justificar el texto</span></label>
+<label class="casilla-ajuste"><input type="checkbox" name="extra" value="bionic"><span>Negrita en el inicio de cada palabra<span>Algunos lectores de pantalla pueden leer peor el texto con esta opción.</span></span></label>
+<label class="casilla-ajuste"><input type="checkbox" name="extra" value="focus"><span>Foco: atenuar las ofertas que no se están leyendo<span>Las ofertas atenuadas tienen menos contraste de forma intencionada.</span></span></label>
+</fieldset>
+<p class="aj-nota">Sus ajustes se guardan únicamente en este navegador y no se envían a ningún servidor.</p>
+</div>
+<div class="aj-pie"><button type="button" id="ajustes-reset">Restablecer apariencia</button></div>
+</dialog>"""
+
+SETTINGS_BUTTON = ('<button type="button" id="btn-aa" class="btn-cab" aria-haspopup="dialog" hidden>'
+                   '<span class="aa" aria-hidden="true">Aa</span> <span class="aa-texto">Apariencia</span></button>')
+
+
 def page(site: Sitio, title: str, body: str, path: str, current: str = "", description: str = TAGLINE,
          crumbs: list[tuple[str, str]] | None = None, here: str = "", root: str | None = None) -> str:
     """`path` es la ruta de la página («», «tragsa/», «provincia/sevilla/»); los enlaces son relativos.
@@ -206,16 +262,21 @@ def page(site: Sitio, title: str, body: str, path: str, current: str = "", descr
 <meta name="description" content="{e(description)}">
 {meta}
 <link rel="stylesheet" href="{root}assets/estilos.css">
+<script src="{root}assets/tema.js"></script>
 <link rel="icon" href="{root}assets/icono.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Ofertas del Grupo Tragsa (RSS)" href="{PORTAL}feeds/organismo-tragsa.xml">
 </head>
 <body id="arriba">
 <a class="salto" href="#contenido">Saltar al contenido</a>
-<div class="franja"><div class="ancho"><p><strong>Web independiente:</strong> no pertenece a Tragsa ni al Grupo Tragsa. Las ofertas oficiales están en la <a href="{TRAGSA_EMPLEO}">web de empleo de Tragsa</a> y la inscripción se hace en su <a href="{TRAGSA_PORTAL}">Portal de Empleo</a>.</p></div></div>
+<div class="franja"><div class="ancho"><p><strong>Web independiente:</strong> no pertenece a Tragsa ni al Grupo Tragsa. Ofertas oficiales: <a href="{TRAGSA_EMPLEO}">web de empleo</a> · inscripción en su <a href="{TRAGSA_PORTAL}">Portal de Empleo</a>.</p></div></div>
 <header class="sitio">
 <div class="ancho cab">
 <a class="marca" href="{root or "./"}">{SITE_NAME}</a>
-<nav class="principal" aria-label="Principal"><ul>{links}</ul></nav>
+<div class="cab-acciones">
+{SETTINGS_BUTTON}
+<button type="button" id="btn-menu" class="btn-cab" hidden aria-expanded="false" aria-controls="nav-principal">Menú</button>
+</div>
+<nav id="nav-principal" class="principal" aria-label="Principal"><ul>{links}</ul></nav>
 </div></header>
 <main id="contenido" class="ancho" tabindex="-1">
 {trail}{body}
@@ -226,7 +287,13 @@ def page(site: Sitio, title: str, body: str, path: str, current: str = "", descr
 <p>Datos actualizados el {e(stamp(site.generado))}.</p>
 <p><a href="{root}aviso-legal/">Aviso legal y privacidad</a> · <a href="{root}aviso-legal/#reclamaciones">Reclamaciones</a> · <a href="{REPO}">Código fuente</a></p>
 </div></footer>
+<a class="subir-flotante" id="subir-flotante" href="#arriba" hidden><span aria-hidden="true">↑</span> Arriba</a>
+{SETTINGS_DIALOG}
+<script src="{root}assets/guardadas.js" defer></script>
 <script src="{root}assets/filtros.js" defer></script>
+<script src="{root}assets/subir.js" defer></script>
+<script src="{root}assets/ajustes.js" defer></script>
+<script src="{root}assets/compartir.js" defer></script>
 </body>
 </html>
 """
@@ -283,6 +350,26 @@ def search_text(site: Sitio, offer: dict) -> str:
     return plain(" ".join(str(p) for p in parts if p))
 
 
+def saved_id(offer: dict) -> str:
+    """Clave de la oferta en «Guardadas» (guardadas.js); solo letras, cifras y guiones."""
+    return f"o:{slug(offer['id'])}"
+
+
+def saved_filter() -> str:
+    """Pastilla «Guardadas»: oculta hasta que guardadas.js sabe que hay alguna en este navegador."""
+    return ('<label class="pastilla" id="pastilla-guardadas" data-tipo="o" hidden>'
+            '<input type="checkbox" name="guardadas" value="1"> Guardadas<span id="n-guardadas"></span></label>\n')
+
+
+def share_link(offer: dict) -> str:
+    """«Compartir» la ficha oficial. Sin JavaScript, o donde no hay menú nativo, abre el correo (mailto:);
+    con él, compartir.js abre el menú de compartir del sistema."""
+    url = offer.get("url") or TRAGSA_EMPLEO
+    mailto = f"mailto:?subject={quote(offer['titulo'])}&body={quote(offer['titulo'] + chr(10) + url)}"
+    return (f'<a class="compartir" href="{e(mailto)}" data-url="{e(url)}" data-titulo="{e(offer["titulo"])}">'
+            f'Compartir<span class="sr-only">: {e(offer["titulo"])}</span></a>')
+
+
 def offer_card(site: Sitio, offer: dict) -> str:
     today = site.today
     days = (date.fromisoformat(offer["plazo_fin"]) - today).days if offer.get("plazo_fin") else 9999
@@ -298,13 +385,14 @@ def offer_card(site: Sitio, offer: dict) -> str:
     code = f'<span class="dato">Código {e(offer["codigo"])}</span>' if offer.get("codigo") else ""
     apply = (f'<a href="{e(offer["url_inscripcion"])}">Inscribirse<span class="sr-only">: {e(offer["titulo"])}</span></a>'
              if offer.get("url_inscripcion") else "")
-    actions = " · ".join(x for x in (apply, code) if x)
+    actions = " · ".join(x for x in (apply, code, share_link(offer)) if x)
     actions = f'<p class="acciones-oferta">{actions}</p>' if actions else ""
-    return f"""<li data-texto="{e(search_text(site, offer))}" data-empresa="{e(slug(offer.get('empresa') or ''))}" data-comunidad="{e(offer.get('ccaa') or SIN_COMUNIDAD)}" data-provincia="{e(offer.get('provincia') or '')}" data-area="{e(areas)}" data-puesto="{e(slug(offer.get('tipo_puesto') or ''))}" data-tipo="{e(offer.get('tipo_contrato') or '')}" data-teletrabajo="{1 if isinstance(remote, str) else 0}" data-plazas="{offer.get('plazas') or 0}" data-plazo="{e(offer.get('plazo_fin') or '9999')}" data-publicada="{e(offer.get('publicada') or offer['detectada'][:10])}" data-pronto="{1 if days <= SOON_DAYS else 0}">
+    return f"""<li data-texto="{e(search_text(site, offer))}" data-empresa="{e(slug(offer.get('empresa') or ''))}" data-comunidad="{e(offer.get('ccaa') or SIN_COMUNIDAD)}" data-provincia="{e(offer.get('provincia') or '')}" data-area="{e(areas)}" data-puesto="{e(slug(offer.get('tipo_puesto') or ''))}" data-tipo="{e(offer.get('tipo_contrato') or '')}" data-teletrabajo="{1 if isinstance(remote, str) else 0}" data-plazas="{offer.get('plazas') or 0}" data-plazo="{e(offer.get('plazo_fin') or '9999')}" data-publicada="{e(offer.get('publicada') or offer['detectada'][:10])}" data-pronto="{1 if days <= SOON_DAYS else 0}" data-guardar="{e(saved_id(offer))}">
 <h2><a href="{e(offer.get('url') or TRAGSA_EMPLEO)}">{e(offer['titulo'])}</a></h2>
 <p>{e(facts)}{extra}</p>
 <p class="plazo">{deadline_text(offer, today)}{published}</p>
 {actions}
+<div class="tarjeta-acciones"></div>
 </li>"""
 
 
@@ -364,7 +452,7 @@ def listing(site: Sitio, offers: list[dict], fixed: set[str] = frozenset()) -> s
 <button type="submit">Buscar</button></div>
 <div class="pastillas">
 {button}<label class="pastilla"><input type="checkbox" name="pronto" value="1"> Cierran en {SOON_DAYS} días</label>
-{remote}<div class="orden"><label for="orden">Ordenar por</label>
+{remote}{saved_filter()}<div class="orden"><label for="orden">Ordenar por</label>
 <select id="orden" name="orden"><option value="reciente">Más recientes</option><option value="plazo">Plazo más próximo</option></select></div>
 </div>
 {panel}</form>
@@ -446,6 +534,9 @@ def open_processes_note(site: Sitio, root: str) -> str:
                     f'{e(humane_caps(p["nombre"]))}</a>: inscripción abierta{until_text}.</li>')
     if not rows:
         return ""
+    if len(rows) == 1:  # un solo proceso: una línea, para no empujar la primera oferta
+        return (f'<p class="nota"><strong>Puestos indefinidos con inscripción abierta:</strong> '
+                f'{rows[0][4:-5].replace(": inscripción abierta", ",", 1)}</p>')
     return (f'<div class="nota"><p><strong>Puestos indefinidos con inscripción abierta</strong></p>'
             f'<ul>{"".join(rows)}</ul></div>')
 
@@ -453,15 +544,15 @@ def open_processes_note(site: Sitio, root: str) -> str:
 def index_page(site: Sitio, grouped: dict) -> str:
     offers = site.ofertas
     total = sum(o.get("plazas") or 0 for o in offers)
-    intro = (f"<p class=\"resumen\">Todas las ofertas abiertas de Tragsa y Tragsatec en un buscador, con su plazo, "
-             f"su ubicación y el enlace a la ficha oficial. Se actualiza cada hora.</p>")
-    jump = ('<p class="saltos">Ver por <a href="#por-comunidad">comunidad</a>, <a href="#por-provincia">provincia</a> '
-            'o <a href="#por-area">área</a>.</p>') if offers else ""
+    intro = ("<p class=\"resumen\">Todas las ofertas abiertas de Tragsa y Tragsatec, con plazo, ubicación y enlace "
+             "a la ficha oficial. Se actualiza cada hora.</p>")
+    jump = ('<p class="aviso-corto"><a href="avisos/">Recibir un aviso</a> de ofertas nuevas · Ver por '
+            '<a href="#por-comunidad">comunidad</a>, <a href="#por-provincia">provincia</a> o '
+            '<a href="#por-area">área</a>.</p>') if offers else alerts_hint("")
     body = f"""<h1>Ofertas de empleo de Tragsa y Tragsatec</h1>
 {intro}
-{alerts_hint("")}
-{open_processes_note(site, "")}
 {jump}
+{open_processes_note(site, "")}
 {listing(site, offers) if offers else empty_note(site, "")}
 {explore(site, grouped, "")}"""
     description = (f"{count(len(offers), 'oferta de empleo abierta', 'ofertas de empleo abiertas')} en Tragsa y "

@@ -10,7 +10,7 @@
   var items = Array.prototype.slice.call(list.children);
   var selects = ["empresa", "comunidad", "provincia", "area", "puesto", "tipo"].filter(function (n) { return form[n]; });
   var VARIOS = { area: true }; // una oferta puede tener dos áreas, separadas por espacios
-  var casillas = ["pronto", "teletrabajo"].filter(function (n) { return form[n]; });
+  var casillas = ["pronto", "teletrabajo", "guardadas"].filter(function (n) { return form[n]; });
   var mas = document.getElementById("mas-filtros");
   var botonMas = document.getElementById("btn-filtros");
   var names = ["q"].concat(selects, form.orden ? ["orden"] : []);

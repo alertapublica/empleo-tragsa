@@ -1,78 +1,167 @@
 /* Paleta propia (no la de Tragsa). Claro u oscuro según el sistema.
    tests/test_generar.py comprueba un contraste de 4,5:1 en los dos bloques que definen --ink. */
+/* Paleta propia (no la de Tragsa). Sin JavaScript manda el tema del sistema; con él, data-theme (ver tema.js).
+   tests/test_generar.py comprueba 4,5:1 en cada bloque que define --ink. */
 :root {
   color-scheme: light;
   --bg: #faf9f7;
   --surface: #ffffff;
   --ink: #1f1d22;
+  --titulos: #1f1d22;
   --muted: #4d4853;
   --line: #d3cfd8;
   --accent: #5b2a72;
   --accent-ink: #ffffff;
   --alert: #8a3100;
   --alert-bg: #fdeedd;
-  --franja: #f1eaf5;
   --focus: #0b57d0;
+  /* Ajustes «Aa»: --fs es % de la letra del navegador; --ancho, el ancho máximo del contenido («none»: completo). */
+  --fs: 112.5;
+  --ancho: 1200px;
+  --lh: 1.6;
   --ff: Atkinson Hyperlegible, Verdana, "DejaVu Sans", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     color-scheme: dark;
     --bg: #151318;
     --surface: #1e1b22;
     --ink: #f0eef2;
+    --titulos: #f0eef2;
     --muted: #c3bdc9;
     --line: #48424f;
     --accent: #dcb6f0;
     --accent-ink: #1c1022;
     --alert: #ffc592;
     --alert-bg: #3b2615;
-    --franja: #2a2230;
     --focus: #9cc2ff;
   }
 }
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #151318;
+  --surface: #1e1b22;
+  --ink: #f0eef2;
+  --titulos: #f0eef2;
+  --muted: #c3bdc9;
+  --line: #48424f;
+  --accent: #dcb6f0;
+  --accent-ink: #1c1022;
+  --alert: #ffc592;
+  --alert-bg: #3b2615;
+  --focus: #9cc2ff;
+}
+:root[data-theme="sepia"] {
+  color-scheme: light;
+  --bg: #f4ecd8;
+  --surface: #fbf6e8;
+  --ink: #3b2f1e;
+  --titulos: #3b2f1e;
+  --muted: #5f4f33;
+  --line: #c9bb98;
+  --accent: #7d3b1c;
+  --accent-ink: #ffffff;
+  --alert: #8b2020;
+  --alert-bg: #ecd9d2;
+  --focus: #2e5a8b;
+}
+:root[data-theme="contrast"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #0d0d0d;
+  --ink: #ffffff;
+  --titulos: #ffffff;
+  --muted: #ffff00;
+  --line: #ffffff;
+  --accent: #00ffff;
+  --accent-ink: #000000;
+  --alert: #ff9a9a;
+  --alert-bg: #330000;
+  --focus: #ffff00;
+}
+[data-font="serif"] { --ff: Georgia, "Times New Roman", serif; }
+[data-font="dyslexic"] { --ff: Verdana, Tahoma, "Comic Sans MS", sans-serif; letter-spacing: 0.03em; word-spacing: 0.1em; }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { font-size: 112.5%; -webkit-text-size-adjust: 100%; background: var(--bg); }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--ff); line-height: 1.6; overflow-wrap: anywhere; }
+html { font-size: calc(var(--fs) * 1%); -webkit-text-size-adjust: 100%; background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--ff); line-height: var(--lh); overflow-wrap: anywhere; }
 a { color: var(--accent); text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 3px; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
-h1, h2, h3 { line-height: 1.25; text-wrap: balance; }
+h1, h2, h3 { line-height: 1.25; text-wrap: balance; color: var(--titulos); }
 h1 { font-size: 1.9rem; margin: 0 0 0.5rem; }
 h2 { font-size: 1.3rem; margin: 2rem 0 0.4rem; }
 h3 { font-size: 1.05rem; margin: 1.4rem 0 0.3rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .salto { position: absolute; left: 1rem; top: -4rem; padding: 0.6rem 1rem; background: var(--accent); color: var(--accent-ink); z-index: 30; }
 .salto:focus { top: 0.5rem; }
-.ancho { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.ancho { max-width: var(--ancho); margin: 0 auto; padding: 0 1rem; }
 
 /* Franja «web independiente», en todas las páginas. */
-.franja { background: var(--franja); border-bottom: 1px solid var(--line); font-size: 0.9rem; }
-.franja p { margin: 0; padding: 0.45rem 0; }
+.franja { background: var(--surface); border-bottom: 1px solid var(--line); font-size: 0.85rem; line-height: 1.4; }
+.franja p { margin: 0; padding: 0.3rem 0; }
 
-/* Cabecera: marca y menú; en pantallas estrechas el menú baja a su propia fila. */
+/* Cabecera: marca, menú y controles en una fila. En pantallas estrechas el menú baja y se pliega.
+   En el HTML los controles van antes del menú para que, abierto en móvil, el foco pase del botón a él. */
 header.sitio { border-bottom: 1px solid var(--line); background: var(--surface); }
-.cab { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0 1rem; min-height: 3.25rem; }
-.marca { align-self: center; font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; padding: 0.4rem 0; }
-nav.principal { flex: 1 1 auto; display: flex; }
+.cab { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0 0.75rem; min-height: 3.25rem; container: cab / inline-size; }
+.marca { order: 1; align-self: center; font-weight: 700; font-size: 1.1rem; color: var(--titulos); text-decoration: none; padding: 0.4rem 0; }
+nav.principal { order: 2; flex: 1 1 auto; display: flex; }
+.cab-acciones { order: 3; align-self: center; display: flex; gap: 0.4rem; flex-shrink: 0; margin-left: auto; }
+.btn-cab {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.3rem 0.8rem;
+  font: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  color: var(--ink); background: transparent; border: 2px solid var(--line); border-radius: 6px;
+}
+.btn-cab:hover { border-color: var(--muted); }
+.btn-cab[aria-expanded="true"] { background: var(--bg); border-color: var(--accent); }
+.aa { font-weight: 800; letter-spacing: -0.03em; }
+/* «Aa» solo, para que quepa en la fila del menú; el nombre sigue para el lector de pantalla. */
+.aa-texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 nav.principal ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0 0.1rem; padding: 0; margin: 0; }
 nav.principal a {
-  display: flex; align-items: center; height: 100%; min-height: 44px; padding: 0.4rem 0.5rem; color: var(--ink);
-  font-size: 0.95rem; text-decoration: none; border-bottom: 4px solid transparent;
+  display: flex; align-items: center; height: 100%; padding: 0.4rem 0.5rem; min-height: 44px; color: var(--ink); font-size: 0.95rem;
+  text-decoration: none; border-bottom: 4px solid transparent;
 }
 nav.principal a:hover { border-color: var(--line); }
 nav.principal a[aria-current="page"] { font-weight: 700; border-color: var(--accent); }
+/* Según el ancho del contenido (y de la letra): si no cabe, el menú baja a su propia fila. */
+@container cab (max-width: 50em) {
+  .marca { flex: 1; min-width: 0; }
+  .cab-acciones { order: 2; }
+  nav.principal { order: 3; flex-basis: 100%; }
+}
 @media (max-width: 42em) {
-  nav.principal { flex-basis: 100%; }
-  nav.principal a { min-height: 40px; padding: 0.3rem 0.5rem; }
+  .marca { font-size: 1rem; line-height: 1.25; }
+  .cab-acciones { order: 2; }
+  nav.principal { order: 3; flex-basis: 100%; margin: 0 -1rem; }
+  .menu-js nav.principal:not(.abierto) { display: none; }
+  nav.principal ul { flex-direction: column; flex: 1; }
+  nav.principal a { display: block; padding: 0.55rem 1rem; border-bottom-width: 1px; border-left: 4px solid transparent; border-color: var(--line); }
+  nav.principal a[aria-current="page"] { border-left-color: var(--accent); }
+}
+@media (min-width: 42.01em) {
+  #btn-menu { display: none; }
+}
+/* Cabecera fija al bajar, para no tener que volver arriba a por el menú. Solo con JS (sin él, en móvil
+   el menú no se pliega y ocuparía la pantalla) y con altura de sobra: con zoom fuerte o el móvil
+   apaisado se queda como antes. ajustes.js mide la cabecera en --cab-alto para que no tape el foco
+   ni el destino de los anclas, y su fila de arriba (marca y botones) en --cab-fila para el menú abierto. */
+@media screen and (min-height: 30em) {
+  .menu-js { scroll-padding-top: calc(var(--cab-alto, 3.5rem) + 0.5rem); }
+  .menu-js header.sitio { position: sticky; top: 0; z-index: 10; }
+}
+@media screen and (min-height: 30em) and (max-width: 42em) {
+  /* Abierto en móvil, el menú se desplaza por dentro y no se sale de la pantalla. */
+  .menu-js nav.principal.abierto { max-height: calc(100dvh - var(--cab-fila, 3.5rem)); overflow-y: auto; overscroll-behavior: contain; }
 }
 
-main.ancho { padding-top: 1rem; padding-bottom: 3rem; }
+main.ancho { padding-top: 0.6rem; padding-bottom: 3rem; }
 main > h2 { padding-bottom: 0.3rem; border-bottom: 2px solid var(--line); }
-.resumen { color: var(--muted); margin: 0 0 1rem; }
-.nota { border-left: 4px solid var(--accent); background: var(--surface); padding: 0.7rem 1rem; margin: 1rem 0; }
+.resumen { color: var(--muted); margin: 0 0 0.5rem; }
+.nota { border-left: 4px solid var(--accent); background: var(--surface); padding: 0.6rem 1rem; margin: 0.8rem 0; }
 .nota > :first-child { margin-top: 0; }
 .nota > :last-child { margin-bottom: 0; }
 .nota ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
@@ -179,3 +268,78 @@ footer.sitio { border-top: 1px solid var(--line); color: var(--muted); padding: 
 footer.sitio a { color: inherit; }
 footer.sitio p { margin: 0.4rem 0; }
 footer.sitio .subir a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--accent); }
+
+/* Ayudas de lectura de «Aa». */
+/* Justificar: el texto del contenido (las líneas cortas no cambian; tablas, código y tarjetas, tampoco). */
+[data-just="1"] main :is(p, li, dd):not(.ofertas *) { text-align: justify; hyphens: auto; }
+[data-bionic="1"] b { font-weight: 800; }
+
+/* Panel «Aa»: lateral en pantallas anchas; hoja inferior en móvil. */
+dialog.ajustes {
+  padding: 0; color: var(--ink); background: var(--bg); border: 1px solid var(--line);
+  width: min(26rem, 100vw); max-width: 100vw; max-height: 100dvh; margin: 0 0 0 auto; height: 100dvh;
+  border-radius: 0; box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
+dialog.ajustes[open] { display: flex; flex-direction: column; }
+dialog.ajustes::backdrop { background: rgba(0, 0, 0, 0.55); }
+.aj-cab { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--line); }
+.aj-cab h2 { margin: 0; font-size: 1.2rem; }
+.aj-cuerpo { flex: 1; min-height: 0; overflow-y: auto; padding: 0.4rem 1.2rem 1rem; overscroll-behavior: contain; }
+.aj-pie { padding: 0.8rem 1.2rem; border-top: 1px solid var(--line); }
+dialog.ajustes fieldset { border: 0; border-top: 1px solid var(--line); margin: 0; padding: 0.9rem 0; min-width: 0; }
+dialog.ajustes fieldset:first-child { border-top: 0; }
+dialog.ajustes legend { padding: 0; margin-bottom: 0.4rem; font-weight: 700; }
+.opciones { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.opcion { position: relative; }
+.opcion input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.opcion label {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0.3rem 0.9rem; cursor: pointer;
+  border: 2px solid var(--muted); border-radius: 6px; font-weight: 600; background: transparent;
+}
+.opcion input:checked + label { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.opcion input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 3px; }
+.casilla-ajuste { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.35rem 0; }
+.casilla-ajuste input { width: 1.4rem; height: 1.4rem; margin-top: 0.2rem; accent-color: var(--accent); flex-shrink: 0; }
+.casilla-ajuste span span { display: block; color: var(--muted); font-size: 0.9rem; }
+.paso { display: flex; align-items: center; gap: 0.6rem; }
+.paso output { min-width: 5.5rem; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.paso button { min-width: 44px; }
+.colores { display: grid; gap: 0.5rem; margin-top: 0.8rem; }
+.color-fila { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; }
+.color-fila input[type="color"] { width: 44px; height: 44px; padding: 2px; border: 1px solid var(--muted); border-radius: 6px; background: var(--surface); cursor: pointer; }
+.color-fila label { font-weight: 600; min-width: 5rem; }
+.color-fila output { color: var(--muted); font-size: 0.9rem; }
+.color-fila output.poco { color: var(--alert); font-weight: 700; }
+.aj-nota { color: var(--muted); font-size: 0.9rem; margin: 0.4rem 0 0; }
+@media (max-width: 42em) {
+  dialog.ajustes { width: 100vw; height: auto; max-height: 92dvh; margin: auto 0 0; border-radius: 14px 14px 0 0; }
+}
+
+/* Botón flotante «Arriba» (con JS, tras bajar un poco). Abajo a la derecha, sin tapar el texto central. */
+.subir-flotante {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 20;
+  display: inline-flex; align-items: center; gap: 0.3rem; min-height: 44px; padding: 0 1rem;
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none;
+  border: 2px solid var(--bg); border-radius: 999px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.subir-flotante:hover { text-decoration: underline; }
+@media print { .subir-flotante { display: none !important; } }
+
+.ofertas > li.foco-atenuada { opacity: 0.5; }
+
+/* «Guardar» (guardadas.js): discreto, a la derecha del título en pantallas anchas y debajo en el móvil.
+   Marcado: estrella llena y borde de acento. Sin JavaScript el hueco queda vacío y no ocupa nada. */
+.guardar { min-height: 36px; margin-top: 0.4rem; padding: 0.15rem 0.75rem; font-weight: 400; border-width: 1px; border-radius: 999px; }
+.guardar span { color: var(--accent); }
+.guardar[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.tarjeta-acciones .guardar { margin-top: 0; }
+#guardadas-cerradas ul { margin: 0.3rem 0; }
+.ofertas .tarjeta-acciones { margin-top: 0.35rem; }
+.ofertas .tarjeta-acciones:empty { display: none; }
+.acciones-oferta a.compartir { display: inline-flex; align-items: center; min-height: 36px; font-weight: 600; }
+@media (min-width: 42.01em) {
+  .ofertas > li:not([hidden]):has(> .tarjeta-acciones:not(:empty)) { display: grid; grid-template-columns: 1fr auto; column-gap: 1.25rem; }
+  .ofertas > li:has(> .tarjeta-acciones) > * { grid-column: 1 / -1; }
+  .ofertas > li:has(> .tarjeta-acciones) > :first-child { grid-column: 1; }
+  .ofertas > li > .tarjeta-acciones { grid-column: 2; grid-row: 1; align-self: start; margin: 0; }
+}

@@ -361,6 +361,9 @@ def saved_filter() -> str:
             '<input type="checkbox" name="guardadas" value="1"> Guardadas<span id="n-guardadas"></span></label>\n')
 
 
+NUEVA_PESTANA = ' target="_blank" rel="noopener"'  # enlaces a tragsa.es: la lista sigue abierta
+
+
 def share_link(offer: dict) -> str:
     """«Compartir» la ficha oficial. Sin JavaScript, o donde no hay menú nativo, abre el correo (mailto:);
     con él, compartir.js abre el menú de compartir del sistema."""
@@ -383,12 +386,12 @@ def offer_card(site: Sitio, offer: dict) -> str:
                  if offer.get("publicada") else "")
     areas = " ".join(offer.get("areas") or []) or SIN_AREA
     code = f'<span class="dato">Código {e(offer["codigo"])}</span>' if offer.get("codigo") else ""
-    apply = (f'<a href="{e(offer["url_inscripcion"])}">Inscribirse<span class="sr-only">: {e(offer["titulo"])}</span></a>'
+    apply = (f'<a href="{e(offer["url_inscripcion"])}"{NUEVA_PESTANA}>Inscribirse<span class="sr-only">: {e(offer["titulo"])}</span></a>'
              if offer.get("url_inscripcion") else "")
     actions = " · ".join(x for x in (apply, code, share_link(offer)) if x)
     actions = f'<p class="acciones-oferta">{actions}</p>' if actions else ""
     return f"""<li data-texto="{e(search_text(site, offer))}" data-empresa="{e(slug(offer.get('empresa') or ''))}" data-comunidad="{e(offer.get('ccaa') or SIN_COMUNIDAD)}" data-provincia="{e(offer.get('provincia') or '')}" data-area="{e(areas)}" data-puesto="{e(slug(offer.get('tipo_puesto') or ''))}" data-tipo="{e(offer.get('tipo_contrato') or '')}" data-teletrabajo="{1 if isinstance(remote, str) else 0}" data-plazas="{offer.get('plazas') or 0}" data-plazo="{e(offer.get('plazo_fin') or '9999')}" data-publicada="{e(offer.get('publicada') or offer['detectada'][:10])}" data-pronto="{1 if days <= SOON_DAYS else 0}" data-guardar="{e(saved_id(offer))}">
-<h2><a href="{e(offer.get('url') or TRAGSA_EMPLEO)}">{e(offer['titulo'])}</a></h2>
+<h2><a href="{e(offer.get('url') or TRAGSA_EMPLEO)}"{NUEVA_PESTANA}>{e(offer['titulo'])}</a></h2>
 <p>{e(facts)}{extra}</p>
 <p class="plazo">{deadline_text(offer, today)}{published}</p>
 {actions}
@@ -545,11 +548,11 @@ def index_page(site: Sitio, grouped: dict) -> str:
     offers = site.ofertas
     total = sum(o.get("plazas") or 0 for o in offers)
     intro = ("<p class=\"resumen\">Todas las ofertas abiertas de Tragsa y Tragsatec, con plazo, ubicación y enlace "
-             "a la ficha oficial. Se actualiza cada hora.</p>")
+             "a la ficha oficial. Se actualiza cada media hora en horario laboral.</p>")
     jump = ('<p class="aviso-corto"><a href="avisos/">Recibir un aviso</a> de ofertas nuevas · Ver por '
             '<a href="#por-comunidad">comunidad</a>, <a href="#por-provincia">provincia</a> o '
             '<a href="#por-area">área</a>.</p>') if offers else alerts_hint("")
-    body = f"""<h1>Ofertas de empleo de Tragsa y Tragsatec</h1>
+    body = f"""<h1 class="sr-only">Ofertas de empleo de Tragsa y Tragsatec</h1>
 {intro}
 {jump}
 {open_processes_note(site, "")}
@@ -699,7 +702,7 @@ def process_page(site: Sitio, p: dict) -> str:
     links = [f'<a class="boton" href="{e(p.get("url") or TRAGSA_EMPLEO)}">Página oficial del proceso</a>']
     if p.get("url_inscripcion"):
         label = "Inscribirse en la plataforma oficial" if p["estado"] == "abierto" else "Plataforma del proceso"
-        links.append(f'<a href="{e(p["url_inscripcion"])}">{label}</a>')
+        links.append(f'<a href="{e(p["url_inscripcion"])}"{NUEVA_PESTANA}>{label}</a>')
     notices = sorted(p["comunicados"], key=lambda n: n.get("fecha") or "", reverse=True)
     items = "".join(f"<li>{notice(n)}</li>" for n in notices)
     body = f"""<h1>{e(name)}</h1>

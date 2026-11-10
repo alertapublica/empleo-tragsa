@@ -159,8 +159,10 @@ class Web(unittest.TestCase):
     def test_titulo_abre_la_ficha_oficial(self):
         portada = self.read("index.html")
         oferta = next(o for o in self.data["ofertas"] if o["estado"] == "abierta")
-        self.assertIn(f'<a href="{oferta["url"].replace("&", "&amp;")}">', portada)
-        self.assertIn(oferta["url_inscripcion"].replace("&", "&amp;"), portada)
+        # Los dos enlaces a Tragsa abren en una pestaña nueva, para no perder la lista.
+        self.assertIn(f'<a href="{oferta["url"].replace("&", "&amp;")}" target="_blank" rel="noopener">', portada)
+        self.assertIn(f'<a href="{oferta["url_inscripcion"].replace("&", "&amp;")}" target="_blank" rel="noopener">',
+                      portada)
 
     def test_grupo_tragsa_en_las_dos_empresas(self):
         grupo = next(o for o in self.data["ofertas"] if o["empresa"] == "Grupo Tragsa")

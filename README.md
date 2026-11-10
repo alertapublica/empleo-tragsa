@@ -15,7 +15,7 @@ alertapublica.es/api/ (ofertas, procesos, listas)  →  python -m web  →  _sit
 ```
 
 - **Los datos no se calculan aquí.** Salen de la [API de Empleo en Empresas Públicas](https://alertapublica.es/datos/) ([repo](https://github.com/alertapublica/empleo-publico-abierto)), que ya trae los códigos INE, las áreas y la mención del teletrabajo. Se filtra `organismo == "tragsa"` y se genera HTML estático, para que los buscadores lo indexen.
-- **Sin fichas propias.** El título de cada oferta abre su ficha en tragsa.es e «Inscribirse» lleva al Portal de Empleo de Tragsa. Así no se duplica contenido.
+- **Sin fichas propias.** El título de cada oferta abre su ficha en tragsa.es e «Inscribirse» lleva al Portal de Empleo de Tragsa, los dos en una pestaña nueva. Así no se duplica contenido.
 - **Páginas que aparecen y desaparecen.** Cada comunidad, provincia y área tiene página solo mientras haya ofertas abiertas. Al vaciarse, la página desaparece (404) y sale del `sitemap.xml`.
 - **Avisos.** No se gestionan aquí. Se enlaza al portal: `alertapublica.es/avisos/?organismo=tragsa` para el correo y `t.me/<bot>?start=tragsa` para Telegram, los dos con Tragsa ya elegido.
 - **Sin dependencias.** Solo la biblioteca estándar de Python, sin cookies, sin analítica y sin recursos externos (CSP estricta).
@@ -45,19 +45,19 @@ En los dos primeros casos no se vuelve a publicar si la web publicada ya tiene e
 
 ## Puesta en marcha
 
-1. **Pages:** en *Settings → Pages*, la fuente tiene que ser «GitHub Actions».
-2. **Dominio propio**, cuando exista:
+1. **Pages** (hecho): en *Settings → Pages*, la fuente es «GitHub Actions». Mientras no haya dominio propio, la web está en <https://alertapublica.github.io/empleo-tragsa/>.
+2. **Dominio propio** (pendiente), cuando exista:
    - el dominio en *Settings → Pages → Custom domain*, con su DNS en Cloudflare y sin proxy. Para un dominio raíz, los registros `A` de GitHub Pages (185.199.108.153 a 185.199.111.153). Para un subdominio, un `CNAME` a `alertapublica.github.io`;
    - activar «Enforce HTTPS»;
    - la variable del repo `BASE_URL` con `https://<dominio>/`, que usan las direcciones canónicas, el sitemap y `robots.txt`.
-3. **Aviso desde el portal:**
+3. **Aviso desde el portal** (hecho):
    - crear un token de grano fino con acceso **solo** a `alertapublica/empleo-tragsa` y el permiso «Actions: lectura y escritura»;
    - guardarlo como secreto `TOKEN_WEB_TRAGSA` en `alertapublica/empleo-publico-abierto`.
 
-   Sin él, la web solo se actualiza con el cron.
-4. **Buzón de reclamaciones:** de momento es el correo del titular (`CONTACTO` en [`web/generar.py`](web/generar.py)). Con el dominio se puede crear `reclamaciones@<dominio>` con el reenvío de correo de Cloudflare y cambiarlo ahí.
+   Sin él, la web solo se actualiza con el cron. Los tokens de grano fino caducan: al renovarlo, hay que volver a guardarlo en ese secreto.
+4. **Buzón de reclamaciones** (pendiente del dominio): de momento es el correo del titular (`CONTACTO` en [`web/generar.py`](web/generar.py)). Con el dominio se puede crear `reclamaciones@<dominio>` con el reenvío de correo de Cloudflare y cambiarlo ahí.
 
-Otras variables opcionales del generador: `API_URL` (otra API o una carpeta local) y `TELEGRAM_BOT` (usuario del bot, sin @).
+Otras variables opcionales del generador: `API_URL` (otra API o una carpeta local) y `TELEGRAM_BOT` (usuario del bot, sin @; por defecto `empleo_aapp_bot`, el mismo del portal).
 
 ## Desarrollo
 

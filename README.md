@@ -45,19 +45,19 @@ En los dos primeros casos no se vuelve a publicar si la web publicada ya tiene e
 
 ## Puesta en marcha
 
-1. **Pages:** en *Settings → Pages*, la fuente tiene que ser «GitHub Actions».
-2. **Dominio propio**, cuando exista:
+1. **Pages** (hecho): en *Settings → Pages*, la fuente es «GitHub Actions». Mientras no haya dominio propio, la web está en <https://alertapublica.github.io/empleo-tragsa/>.
+2. **Dominio propio** (pendiente), cuando exista:
    - el dominio en *Settings → Pages → Custom domain*, con su DNS en Cloudflare y sin proxy. Para un dominio raíz, los registros `A` de GitHub Pages (185.199.108.153 a 185.199.111.153). Para un subdominio, un `CNAME` a `alertapublica.github.io`;
    - activar «Enforce HTTPS»;
    - la variable del repo `BASE_URL` con `https://<dominio>/`, que usan las direcciones canónicas, el sitemap y `robots.txt`.
-3. **Aviso desde el portal:**
+3. **Aviso desde el portal** (hecho):
    - crear un token de grano fino con acceso **solo** a `alertapublica/empleo-tragsa` y el permiso «Actions: lectura y escritura»;
    - guardarlo como secreto `TOKEN_WEB_TRAGSA` en `alertapublica/empleo-publico-abierto`.
 
-   Sin él, la web solo se actualiza con el cron.
-4. **Buzón de reclamaciones:** de momento es el correo del titular (`CONTACTO` en [`web/generar.py`](web/generar.py)). Con el dominio se puede crear `reclamaciones@<dominio>` con el reenvío de correo de Cloudflare y cambiarlo ahí.
+   Sin él, la web solo se actualiza con el cron. Los tokens de grano fino caducan: al renovarlo, hay que volver a guardarlo en ese secreto.
+4. **Buzón de reclamaciones** (pendiente del dominio): de momento es el correo del titular (`CONTACTO` en [`web/generar.py`](web/generar.py)). Con el dominio se puede crear `reclamaciones@<dominio>` con el reenvío de correo de Cloudflare y cambiarlo ahí.
 
-Otras variables opcionales del generador: `API_URL` (otra API o una carpeta local) y `TELEGRAM_BOT` (usuario del bot, sin @).
+Otras variables opcionales del generador: `API_URL` (otra API o una carpeta local) y `TELEGRAM_BOT` (usuario del bot, sin @; por defecto `empleo_aapp_bot`, el mismo del portal).
 
 ## Desarrollo
 
